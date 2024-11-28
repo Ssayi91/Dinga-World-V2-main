@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 async function fetchBlogs() {
     try {
-        const response = await fetch('https://dinga-world.onrender.com/admin/blogs');
+        const response = await fetch('https://dinga-world-v2-main.onrender.com/blogs');
         const blogs = await response.json();
         displayBlogs(blogs);
     } catch (error) {
@@ -50,7 +50,7 @@ document.querySelector('.post-form').addEventListener('submit', async (event) =>
     const id = document.querySelector('.post-form').dataset.id;
 
     try {
-        const url = id ? `https://dinga-world.onrender.com/admin/blogs/${id}` : '/admin/blogs';
+        const url = id ? `https://dinga-world-v2-main.onrender.com/admin/blogs/${id}` : '/admin/blogs';
         const method = id ? 'PUT' : 'POST';
 
         // Send the formData directly without defining blogData
@@ -74,7 +74,7 @@ document.querySelector('.post-form').addEventListener('submit', async (event) =>
 async function deleteBlog(id) {
     if (confirm('Are you sure you want to delete this post?')) {
         try {
-            await fetch(`https://dinga-world.onrender.com/admin/blogs/${id}`, { method: 'DELETE' });
+            await fetch(`https://dinga-world-v2-main.onrender.com/blogs/${id}`, { method: 'DELETE' });
             fetchBlogs();
         } catch (error) {
             console.error('Error deleting blog post:', error);
