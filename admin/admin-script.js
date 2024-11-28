@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load cars with sorting and filtering functionality
     function loadCars(sortBy = '', brand = '', model = '', year = '', price = '') {
-        const url = `https://dinga-world.onrender.com/admin/cars?sortBy=${sortBy}&brand=${brand}&model=${model}&year=${year}&price=${price}`;
+        const url = `https://dinga-world-v2-main.onrender.com/admin/cars?sortBy=${sortBy}&brand=${brand}&model=${model}&year=${year}&price=${price}`;
     
         fetch(url)
             .then(handleResponse)
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const method = carId ? 'PUT' : 'POST'; // Use PUT if editing, POST if adding
-    const url = carId ? `https://dinga-world.onrender.com/admin/cars/${carId}` : '/admin/cars'; // Dynamic URL based on edit or add
+    const url = carId ? `https://dinga-world-v2-main.onrender.com/admin/cars/${carId}` : '/admin/cars'; // Dynamic URL based on edit or add
 
     fetch(url, { method: method, body: formData })
         .then(handleResponse)
@@ -354,7 +354,7 @@ document.getElementById('car-form').addEventListener('submit', async (e) => {
 
     // Send request for normal car addition
     try {
-        const response = await fetch('https://dinga-world.onrender.com/admin/cars', {
+        const response = await fetch('https://dinga-world-v2-main.onrender.com/admin/cars', {
             method: 'POST',
             body: formData
         });
@@ -375,7 +375,7 @@ document.getElementById('import-btn').addEventListener('click', async () => {
     formData.append('source', 'import'); // Mark as imported
 
     try {
-        const response = await fetch('https://dinga-world.onrender.com/admin/cars', {
+        const response = await fetch('https://dinga-world-v2-main.onrender.com/admin/cars', {
             method: 'POST',
             body: formData
         });
@@ -392,7 +392,7 @@ document.getElementById('import-btn').addEventListener('click', async () => {
 
 
 // Set up EventSource for real-time updates
-const eventSource = new EventSource('https://dinga-world.onrender.com/events');
+const eventSource = new EventSource('https://dinga-world-v2-main.onrender.com/events');
 
 eventSource.onmessage = function(event) {
     const data = JSON.parse(event.data);
@@ -429,7 +429,7 @@ const removedImages = [];
 // Move editCar function outside the DOMContentLoaded event listener
 window.editCar = function(carId) {
     console.log('Editing car with ID:', carId); // Log the car ID
-    fetch(`https://dinga-world.onrender.com/admin/cars/${carId}`)
+    fetch(`https://dinga-world-v2-main.onrender.com/admin/cars/${carId}`)
         .then(response => response.json())
         .then(car => {
             // Populate form fields with car data
@@ -492,7 +492,7 @@ document.getElementById('car-form').addEventListener('submit', function(event) {
     const formData = new FormData(this);
     formData.append('removedImages', JSON.stringify(removedImages)); // Send removed images
 
-    fetch(`https://dinga-world.onrender.com/admin/cars/${document.getElementById('car-id').value}`, {
+    fetch(`https://dinga-world-v2-main.onrender.com/admin/cars/${document.getElementById('car-id').value}`, {
         method: 'PUT',
         body: formData
     })
@@ -532,7 +532,7 @@ document.getElementById('car-form').addEventListener('submit', (event) => {
         }
     }
 
-    fetch(carId ? `https://dinga-world.onrender.com/admin/cars/${carId}` : '/admin/cars', {
+    fetch(carId ? `https://dinga-world-v2-main.onrender.com/admin/cars/${carId}` : '/admin/cars', {
         method: carId ? 'PUT' : 'POST',
         body: formData,
     })
@@ -551,7 +551,7 @@ document.getElementById('car-form').addEventListener('submit', (event) => {
 car.find({ source: 'public' }).then(carsFromPublic => {
 });
 
-const sse = new EventSource('https://dinga-world.onrender.com/admin/cars/stream');  // or for the public side
+const sse = new EventSource('https://dinga-world-v2-main.onrender.com/admin/cars/stream');  // or for the public side
 sse.onmessage = function(event) {
     const updatedCars = JSON.parse(event.data);
     fetchAndDisplayCars(updatedCars);  // Function to update the car list dynamically
@@ -615,7 +615,7 @@ function displayBlogs(blogs) {
 
 async function deleteBlog(blogId) {
     try {
-        const response = await fetch(`https://dinga-world.onrender.com/admin/blogs/${blogId}`, { method: 'DELETE' });
+        const response = await fetch(`https://dinga-world-v2-main.onrender.com/admin/blogs/${blogId}`, { method: 'DELETE' });
         if (response.ok) {
             alert('Blog deleted successfully!');
             fetchBlogs(); // Refresh the admin blog list
@@ -634,7 +634,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!token) {
         // Redirect to the login page if no token is found
-        window.location.href = 'https://dinga-world.onrender.com/admin-login.html';
+        window.location.href = 'https://dinga-world-v2-main.onrender.com/admin-login.html';
     } else {
         console.log("User is authenticated");
     }
